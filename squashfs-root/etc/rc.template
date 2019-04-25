@@ -1,0 +1,17 @@
+# 此文件用以替代 /etc/rc.local 文件
+# 开机执行脚本可以放在此处
+
+#
+mount_part=`mount | awk '(NR==1){print $1}'`
+if [ $mount_part = "/dev/mtdblock4" ]; then
+    mount /dev/mtdblock5 /mnt
+else
+    mount /dev/mtdblock4 /mnt
+fi
+
+#开启ssh
+mkdir -p /data/etc/dropbear
+rsa_key_file="/data/etc/dropbear/dropbear_rsa_host_key"
+[ -f "$rsa_key_file" ] || dropbearkey -t rsa -f "$rsa_key_file"
+
+[ `ps|grep dropbear|grep -v grep|wc -l` -eq 0 ] && dropbear -r "$rsa_key_file"
