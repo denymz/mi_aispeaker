@@ -3,7 +3,7 @@
 IN_FILES="squashfs-root"
 OUT_FILE="root.squashfs"
 
-if [ `command -v mksquashfs` ]; then
+if [ ! `command -v mksquashfs` ]; then
     echo "mksquashfs 未安装！请先安装"
     exit 1
 fi
@@ -20,7 +20,7 @@ if [ -f "$OUT_FILE" ]; then
     rm -rf $OUT_FILE
 fi
 
-echo "开始打包文件"
+echo -e "\033[35m 开始打包文件: Pack ${IN_FILES} To ${OUT_FILE} \033[0m"
 
 mksquashfs "$IN_FILES" "$OUT_FILE" -comp xz -all-root
 res="$?"
