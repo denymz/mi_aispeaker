@@ -70,10 +70,11 @@ board_system_upgrade() {
     echo "------------------------------------------------------------------------"
     echo
 
+    reboot_flag=0
+    switch_flag=0
+
 	if [ "$2" = "0" ]; then
 		#对当前分区进行操作
-        reboot_flag=0
-        switch_flag=0
 		echo -e "\033[33m 对运行中的分区进行操作可能会发生意外，是否继续？ [Y|N](注意大小写，默认为N) \033[0m"
 		read answer
 		[ $answer != "Y" ] && echo -e "\033[36m 已经取消本次操作 \033[0m" && exit 1
