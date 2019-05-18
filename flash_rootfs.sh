@@ -120,7 +120,7 @@ board_system_upgrade() {
 
     if [ $switch_flag -eq 1 ]; then
         echo -e "\033[32m 正在切换系统并重新启动 ... \033[0m"
-        `fw_env -s boot_part ${kernel_mtd_current}`
+        fw_env -s boot_part ${kernel_mtd_current}
         reboot -f
     fi
 	return 0
