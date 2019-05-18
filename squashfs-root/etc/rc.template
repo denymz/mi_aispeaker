@@ -13,5 +13,8 @@ fi
 mkdir -p /data/etc/dropbear
 rsa_key_file="/data/etc/dropbear/dropbear_rsa_host_key"
 [ -f "$rsa_key_file" ] || dropbearkey -t rsa -f "$rsa_key_file"
-
 [ `ps|grep dropbear|grep -v grep|wc -l` -eq 0 ] && dropbear -r "$rsa_key_file"
+
+#开启xinetd
+mkdir -p /data/etc/xinetd.d
+/bin/xinetd -stayalive -pidfile /tmp/run/xinetd.pid

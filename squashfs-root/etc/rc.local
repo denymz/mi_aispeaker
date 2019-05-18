@@ -3,8 +3,11 @@
 
 #
 rc_file="/data/etc/rc.local"
-[ -f "$rc_file" ] || cp /etc/rc.template /data/etc/rc.local
+[ -f "$rc_file" ] || cp /etc/rc.template $rc_file
 
 . "$rc_file"
+
+services_file="/data/etc/services"
+[ -f "$rc_file" ] || cp /etc/services.template $services_file
 
 exit 0
