@@ -75,16 +75,16 @@ board_system_upgrade() {
 
 	if [ "$2" = "0" ]; then
 		#对当前分区进行操作
-		echo -e "\033[33m 对运行中的分区进行操作可能会发生意外，是否继续？ [Y|N](注意大小写，默认为N) \033[0m"
+		echo -ne "\033[33m 对运行中的分区进行操作可能会发生意外，是否继续？ [Y|N](注意大小写，默认为N): \033[0m"
 		read answer
 		[ $answer != "Y" ] && echo -e "\033[36m 已经取消本次操作 \033[0m" && exit 1
-        echo -e "\033[33m 刷入完成后是否重启？ [Y|N](注意大小写，默认为Y) \033[0m"
+        echo -ne "\033[33m 刷入完成后是否重启？ [Y|N](注意大小写，默认为Y): \033[0m"
 		read is_reboot
         [ $is_reboot != "N" ] && echo -e "\033[36m 系统将会在刷入完成后自动重启 \033[0m" && reboot_flag=1
 	elif [ "$2" = "1" ]; then
 		#对另外一个分区进行操作
 		kernel_mtd_current="$either"
-        echo -e "\033[33m 刷入完成后是否切换到另一系统启动？ [Y|N](注意大小写，默认为Y) \033[0m"
+        echo -ne "\033[33m 刷入完成后是否切换到另一系统启动？ [Y|N](注意大小写，默认为Y): \033[0m"
 		read switch_os
         [ $switch_os != "N" ] && echo -e "\033[36m 系统将会在刷入完成后自动切换系统并重启 \033[0m" && switch_flag=1;
 	else
