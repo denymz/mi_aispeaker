@@ -8,6 +8,6 @@ rc_file="/data/etc/rc.local"
 . "$rc_file"
 
 services_file="/data/etc/services"
-[ -f "$rc_file" ] || cp /etc/services.template $services_file
+[ -f "$services_file" ] || cp /etc/services.template $services_file
 
 exit 0
